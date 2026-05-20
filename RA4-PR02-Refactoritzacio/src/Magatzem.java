@@ -12,66 +12,70 @@ class Magatzem {
 
     public void actualitzarEstat() {
         for (int i = 0; i < articles.length; i++) {
+            actualitzarArticle(articles[i]);
+        }
+    }
 
-            if (!articles[i].nom.equals(FORMATGE)
-                    && !articles[i].nom.equals(ENTRADES)) {
+    private void actualitzarArticle(Article a) {
 
-                if (articles[i].qualitat > 0) {
+        if (!a.nom.equals(FORMATGE)
+                && !a.nom.equals(ENTRADES)) {
 
-                    if (!articles[i].nom.equals(LEGENDARI)) {
-                        articles[i].qualitat--;
-                    }
-                }
+            if (a.qualitat > 0) {
 
-            } else {
-
-                if (articles[i].qualitat < 50) {
-                    articles[i].qualitat++;
-
-                    if (articles[i].nom.equals(ENTRADES)) {
-
-                        if (articles[i].diesPerVendre < 11) {
-                            if (articles[i].qualitat < 50) {
-                                articles[i].qualitat++;
-                            }
-                        }
-
-                        if (articles[i].diesPerVendre < 6) {
-                            if (articles[i].qualitat < 50) {
-                                articles[i].qualitat++;
-                            }
-                        }
-                    }
+                if (!a.nom.equals(LEGENDARI)) {
+                    a.qualitat--;
                 }
             }
 
-            if (!articles[i].nom.equals(LEGENDARI)) {
-                articles[i].diesPerVendre--;
-            }
+        } else {
 
-            if (articles[i].diesPerVendre < 0) {
+            if (a.qualitat < 50) {
+                a.qualitat++;
 
-                if (!articles[i].nom.equals(FORMATGE)) {
+                if (a.nom.equals(ENTRADES)) {
 
-                    if (!articles[i].nom.equals(ENTRADES)) {
-
-                        if (articles[i].qualitat > 0) {
-
-                            if (!articles[i].nom.equals(LEGENDARI)) {
-                                articles[i].qualitat--;
-                            }
+                    if (a.diesPerVendre < 11) {
+                        if (a.qualitat < 50) {
+                            a.qualitat++;
                         }
-
-                    } else {
-                        articles[i].qualitat = 0;
                     }
 
-                } else {
-                    if (articles[i].qualitat < 50) {
-                        articles[i].qualitat++;
+                    if (a.diesPerVendre < 6) {
+                        if (a.qualitat < 50) {
+                            a.qualitat++;
+                        }
                     }
                 }
             }
         }
+
+        if (!a.nom.equals(LEGENDARI)) {
+            a.diesPerVendre--;
+        }
+
+        if (a.diesPerVendre < 0) {
+
+            if (!a.nom.equals(FORMATGE)) {
+
+                if (!a.nom.equals(ENTRADES)) {
+
+                    if (a.qualitat > 0) {
+
+                        if (!a.nom.equals(LEGENDARI)) {
+                            a.qualitat--;
+                        }
+                    }
+
+                } else {
+                    a.qualitat = 0;
+                }
+
+            } else {
+                if (a.qualitat < 50) {
+                    a.qualitat++;
+                }
+            }
+        }
     }
-}}
+}
