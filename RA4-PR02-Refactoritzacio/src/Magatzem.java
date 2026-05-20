@@ -11,71 +11,71 @@ class Magatzem {
     }
 
     public void actualitzarEstat() {
-        for (int i = 0; i < articles.length; i++) {
-            actualitzarArticle(articles[i]);
+        for (Article a : articles) {
+            actualitzarArticle(a);
         }
     }
 
     private void actualitzarArticle(Article a) {
 
-        if (!a.nom.equals(FORMATGE)
-                && !a.nom.equals(ENTRADES)) {
+        if (a.nom.equals(FORMATGE)) {
+            formatge(a);
 
-            if (a.qualitat > 0) {
+        } else if (a.nom.equals(ENTRADES)) {
+            entrades(a);
 
-                if (!a.nom.equals(LEGENDARI)) {
-                    a.qualitat--;
-                }
-            }
+        } else if (a.nom.equals(LEGENDARI)) {
+            legendari(a);
 
         } else {
+            normal(a);
+        }
+    }
 
-            if (a.qualitat < 50) {
-                a.qualitat++;
+    private void normal(Article a) {
 
-                if (a.nom.equals(ENTRADES)) {
-
-                    if (a.diesPerVendre < 11) {
-                        if (a.qualitat < 50) {
-                            a.qualitat++;
-                        }
-                    }
-
-                    if (a.diesPerVendre < 6) {
-                        if (a.qualitat < 50) {
-                            a.qualitat++;
-                        }
-                    }
-                }
-            }
+        if (a.qualitat > 0) {
+            a.qualitat--;
         }
 
-        if (!a.nom.equals(LEGENDARI)) {
-            a.diesPerVendre--;
+        a.diesPerVendre--;
+
+        if (a.diesPerVendre < 0 && a.qualitat > 0) {
+            a.qualitat--;
         }
+    }
+
+    private void formatge(Article a) {
+
+        if (a.qualitat < 50) {
+            a.qualitat++;
+        }
+
+        a.diesPerVendre--;
+
+        if (a.diesPerVendre < 0 && a.qualitat < 50) {
+            a.qualitat++;
+        }
+    }
+
+    private void entrades(Article a) {
 
         if (a.diesPerVendre < 0) {
-
-            if (!a.nom.equals(FORMATGE)) {
-
-                if (!a.nom.equals(ENTRADES)) {
-
-                    if (a.qualitat > 0) {
-
-                        if (!a.nom.equals(LEGENDARI)) {
-                            a.qualitat--;
-                        }
-                    }
-
-                } else {
-                    a.qualitat = 0;
-                }
-
-            } else {
-                if (a.qualitat < 50) {
-                    a.qualitat++;
-                }
-            }
+            a.qualitat = 0;
+            return;
         }
+
+        if (a.qualitat < 50) {
+            a.qualitat++;
+
+            if (a.diesPerVendre < 11) a.qualitat++;
+            if (a.diesPerVendre < 6) a.qualitat++;
+        }
+
+        a.diesPerVendre--;
+    }
+
+    private void legendari(Article a) {
+        // no cambia nada
     }
 }
