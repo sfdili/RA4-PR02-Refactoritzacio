@@ -1,5 +1,9 @@
-
 class Magatzem {
+
+    private static final String FORMATGE = "Formatge Gidurat";
+    private static final String ENTRADES = "Entrades per al Concert del Trobador";
+    private static final String LEGENDARI = "Martell de Thor (Llegendari)";
+
     Article[] articles;
 
     public Magatzem(Article[] articles) {
@@ -7,19 +11,26 @@ class Magatzem {
     }
 
     public void actualitzarEstat() {
+
         for (int i = 0; i < articles.length; i++) {
-            if (!articles[i].nom.equals("Formatge Gidurat")
-                    && !articles[i].nom.equals("Entrades per al Concert del Trobador")) {
+
+            if (!articles[i].nom.equals(FORMATGE)
+                    && !articles[i].nom.equals(ENTRADES)) {
+
                 if (articles[i].qualitat > 0) {
-                    if (!articles[i].nom.equals("Martell de Thor (Llegendari)")) {
+
+                    if (!articles[i].nom.equals(LEGENDARI)) {
                         articles[i].qualitat = articles[i].qualitat - 1;
                     }
                 }
+
             } else {
+
                 if (articles[i].qualitat < 50) {
                     articles[i].qualitat = articles[i].qualitat + 1;
 
-                    if (articles[i].nom.equals("Entrades per al Concert del Trobador")) {
+                    if (articles[i].nom.equals(ENTRADES)) {
+
                         if (articles[i].diesPerVendre < 11) {
                             if (articles[i].qualitat < 50) {
                                 articles[i].qualitat = articles[i].qualitat + 1;
@@ -35,22 +46,29 @@ class Magatzem {
                 }
             }
 
-            if (!articles[i].nom.equals("Martell de Thor (Llegendari)")) {
+            if (!articles[i].nom.equals(LEGENDARI)) {
                 articles[i].diesPerVendre = articles[i].diesPerVendre - 1;
             }
 
             if (articles[i].diesPerVendre < 0) {
-                if (!articles[i].nom.equals("Formatge Gidurat")) {
-                    if (!articles[i].nom.equals("Entrades per al Concert del Trobador")) {
+
+                if (!articles[i].nom.equals(FORMATGE)) {
+
+                    if (!articles[i].nom.equals(ENTRADES)) {
+
                         if (articles[i].qualitat > 0) {
-                            if (!articles[i].nom.equals("Martell de Thor (Llegendari)")) {
+
+                            if (!articles[i].nom.equals(LEGENDARI)) {
                                 articles[i].qualitat = articles[i].qualitat - 1;
                             }
                         }
+
                     } else {
-                        articles[i].qualitat = articles[i].qualitat - articles[i].qualitat;
+                        articles[i].qualitat = 0;
                     }
+
                 } else {
+
                     if (articles[i].qualitat < 50) {
                         articles[i].qualitat = articles[i].qualitat + 1;
                     }
