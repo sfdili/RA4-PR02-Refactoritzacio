@@ -11,7 +11,6 @@ class Magatzem {
     }
 
     public void actualitzarEstat() {
-
         for (int i = 0; i < articles.length; i++) {
 
             if (!articles[i].nom.equals(FORMATGE)
@@ -20,26 +19,26 @@ class Magatzem {
                 if (articles[i].qualitat > 0) {
 
                     if (!articles[i].nom.equals(LEGENDARI)) {
-                        articles[i].qualitat = articles[i].qualitat - 1;
+                        articles[i].qualitat--;
                     }
                 }
 
             } else {
 
                 if (articles[i].qualitat < 50) {
-                    articles[i].qualitat = articles[i].qualitat + 1;
+                    articles[i].qualitat++;
 
                     if (articles[i].nom.equals(ENTRADES)) {
 
                         if (articles[i].diesPerVendre < 11) {
                             if (articles[i].qualitat < 50) {
-                                articles[i].qualitat = articles[i].qualitat + 1;
+                                articles[i].qualitat++;
                             }
                         }
 
                         if (articles[i].diesPerVendre < 6) {
                             if (articles[i].qualitat < 50) {
-                                articles[i].qualitat = articles[i].qualitat + 1;
+                                articles[i].qualitat++;
                             }
                         }
                     }
@@ -47,7 +46,7 @@ class Magatzem {
             }
 
             if (!articles[i].nom.equals(LEGENDARI)) {
-                articles[i].diesPerVendre = articles[i].diesPerVendre - 1;
+                articles[i].diesPerVendre--;
             }
 
             if (articles[i].diesPerVendre < 0) {
@@ -59,7 +58,7 @@ class Magatzem {
                         if (articles[i].qualitat > 0) {
 
                             if (!articles[i].nom.equals(LEGENDARI)) {
-                                articles[i].qualitat = articles[i].qualitat - 1;
+                                articles[i].qualitat--;
                             }
                         }
 
@@ -68,12 +67,11 @@ class Magatzem {
                     }
 
                 } else {
-
                     if (articles[i].qualitat < 50) {
-                        articles[i].qualitat = articles[i].qualitat + 1;
+                        articles[i].qualitat++;
                     }
                 }
             }
         }
     }
-}
+}}
